@@ -31,3 +31,19 @@ def VybavKlienta(paClientSocket, paClientAddr, paPouzivatelia):
         jsonStr = sprava.decode()
         message = json.loads(jsonStr, object_hook=Sprava.json_decoder)
 
+        if message.operacia == Operacia.LOGIN:
+            paPouzivatelia.append(message.od)
+            print("Prihlasil sa {} z IP {}, port {}".format{message.od, paClientAddr[0], paClientAddr[1]})
+            continue
+
+        if message.operacia == Operacia.EXIT:
+            paPouzivatelia.remove(message.od)
+            print("Odhlasil sa {} z IP {}, port {}".format{message.od, paClientAddr[0], paClientAddr[1]})
+            continue
+
+        if message.operacia == Operacia.USERS:
+            odpoved = Sprava("SERVER", message.od, Operacia.USERS.value, paPouzivatelia)
+            jsonStr = json.dumps(odpoved.__dict__)
+            paClientSocket.send(jsonStr.encode())
+
+

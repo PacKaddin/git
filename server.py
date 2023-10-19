@@ -8,7 +8,14 @@ PORT = 8080
 MLEN = 1000
 QUEUE_LENGTH = 10
 
-class Operacia(intEnum):
+class Operacia(IntEnum):
     LOGIN = 1
     EXIT = 2
     USERS = 3
+
+class Sprava:
+    def __init__(self, paOd, paKomu, paOperacia, paText):
+        self.od = paOd
+        self.komu = paKomu
+        self.operacia = paOperacia
+        self.text = paText
